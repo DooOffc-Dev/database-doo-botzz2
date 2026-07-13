@@ -1,6 +1,8 @@
 const RAW_URL = 'https://raw.githubusercontent.com/DooOffc-Dev/dtbs/refs/heads/main/doodb.json';
 const API_URL = 'https://api.github.com/repos/DooOffc-Dev/dtbs/contents/doodb.json';
-const GITHUB_TOKEN = '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'; // GANTI DENGAN TOKEN ASLI LU
+
+// 🔥 TOKEN DIAMBIL DARI VERCEL ENVIRONMENT VARIABLES (AMAN!)
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 
 const LOGIN_PASSWORD = "DooBotzDev";
 let numbersData = [];
