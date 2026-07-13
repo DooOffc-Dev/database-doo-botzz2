@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DataBase DooBotz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="container">
+        <div class="card">
+            <div class="header-image">
+                <div class="robot-avatar">
+                    <img src="https://qu.ax/DMosm" alt="DooBotz Logo">
+                </div>
+                <h2>DooBotza</h2>
+                <span class="badge">By @DooOffc</span>
+                <div class="online-status">ONLINE</div>
+            </div>
+            <div class="dashboard-section">
+                <h3>DataBase - DooBotz</h3>
+                <p class="subtitle">Add and check your registered numbers</p>
+                <div class="input-group">
+                    <input type="text" id="phoneInput" placeholder="Enter phone number">
+                </div>
+                <button class="btn-primary" onclick="addNumber()">
+                    <i class="fas fa-plus"></i> Add Number
+                </button>
+                <div class="search-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search numbers..." onkeyup="searchTable()">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="footer-dashboard">
+                    <a href="https://whatsapp.com/channel/0029Vb7HEHAGZNCxcJD4nd46" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Saluran
+                    </a>
+                    <a href="https://t.me/DooOffc" target="_blank">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/6282172992548" target="_blank">
+                        <i class="fas fa-headset"></i> Owner
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
