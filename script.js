@@ -1,9 +1,6 @@
+const RAW_URL = 'https://raw.githubusercontent.com/DooOffc-Dev/dtbs/refs/heads/main/doodb.json';
+const API_URL = 'https://api.github.com/repos/DooOffc-Dev/dtbs/contents/doodb.json';
 const GITHUB_TOKEN = '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'; // GANTI DENGAN TOKEN ASLI LU
-const REPO_OWNER = 'DooOffc-Dev';
-const REPO_NAME = 'dtbs';
-const FILE_PATH = 'doodb.json';
-const RAW_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${FILE_PATH}`;
-const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
 
 const LOGIN_PASSWORD = "DooBotzDev";
 let numbersData = [];
@@ -56,7 +53,9 @@ if (window.location.pathname.includes('dashboard.html')) {
 async function loadNumbers() {
     try {
         const response = await fetch(RAW_URL);
+        if (!response.ok) throw new Error('Gagal mengambil data');
         const data = await response.json();
+        
         const list = data?.numbers || data?.data || [];
         numbersData = list.map(n => ({ number: n, status: "active" }));
         renderTable(numbersData);
@@ -100,26 +99,35 @@ async function addNumber() {
     }
 
     try {
+        // 1. Ambil data JSON terbaru dari GitHub
         const getRes = await fetch(RAW_URL);
+        if (!getRes.ok) throw new Error('Gagal mengambil data dari GitHub');
         const jsonData = await getRes.json();
 
+        // 2. Tentukan key array (numbers atau data)
         const key = Array.isArray(jsonData?.numbers) ? 'numbers' : (Array.isArray(jsonData?.data) ? 'data' : null);
         if (!key) throw new Error("Struktur database tidak valid");
 
+        // 3. Cek apakah nomor sudah ada
         if (jsonData[key].includes(number)) {
             alert("Nomor sudah ada di database!");
             return;
         }
 
+        // 4. Tambahkan nomor baru
         jsonData[key].push(number);
 
+        // 5. Ambil SHA file saat ini
         const shaRes = await fetch(API_URL);
+        if (!shaRes.ok) throw new Error('Gagal mengambil SHA');
         const shaData = await shaRes.json();
         const currentSHA = shaData.sha;
 
+        // 6. Convert data ke base64
         const updatedData = JSON.stringify(jsonData, null, 2);
         const base64Content = btoa(unescape(encodeURIComponent(updatedData)));
 
+        // 7. Update file di GitHub
         const updateRes = await fetch(API_URL, {
             method: 'PUT',
             headers: {
@@ -138,7 +146,7 @@ async function addNumber() {
         if (updateRes.status === 200) {
             alert(`✅ Nomor ${number} berhasil ditambahkan ke database!`);
             document.getElementById('phoneInput').value = '';
-            loadNumbers();
+            loadNumbers(); // Refresh tabel
         } else {
             alert(`❌ Gagal: ${result.message}`);
         }
