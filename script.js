@@ -2,7 +2,7 @@ const RAW_URL = 'https://raw.githubusercontent.com/DooOffc-Dev/dtbs/refs/heads/m
 const API_URL = 'https://api.github.com/repos/DooOffc-Dev/dtbs/contents/doodb.json';
 
 // 🔥 TOKEN LANGSUNG DIMASUKKAN (BIAR GA RIBET ENV)
-const GITHUB_TOKEN = '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';
+const GITHUB_TOKEN = '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';
 
 const LOGIN_PASSWORD = "DooBotzDev";
 let numbersData = [];
